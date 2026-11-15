@@ -1,0 +1,59 @@
+{
+  "dataset": "/datasets/imdb_reviews.tsv",
+  "seed": 12345,
+  "rows": 47331,
+  "train_rows": 23796,
+  "test_rows": 23535,
+  "share_positive_train": 0.499,
+  "share_positive_test": 0.498,
+  "target_f1": 0.85,
+  "note": "Metrics as printed by the notebook run on the TripleTen platform, rounded to two decimals.",
+  "feature_counts": {
+    "model_1_tfidf_on_normalized_text": 71531,
+    "model_3_tfidf_on_spacy_lemmas": 59139
+  },
+  "models": {
+    "model_0_constant": {
+      "vectorizer": "none",
+      "classifier": "DummyClassifier(strategy='most_frequent')",
+      "train": {"accuracy": 0.50, "f1": 0.00, "aps": 0.50, "roc_auc": 0.50},
+      "test":  {"accuracy": 0.50, "f1": 0.00, "aps": 0.50, "roc_auc": 0.50}
+    },
+    "model_1_nltk_tfidf_lr": {
+      "vectorizer": "TfidfVectorizer(stop_words=nltk english)",
+      "classifier": "LogisticRegression(solver='liblinear', random_state=12345)",
+      "train": {"accuracy": 0.94, "f1": 0.94, "aps": 0.98, "roc_auc": 0.98},
+      "test":  {"accuracy": 0.88, "f1": 0.88, "aps": 0.95, "roc_auc": 0.95}
+    },
+    "model_3_spacy_tfidf_lr": {
+      "vectorizer": "TfidfVectorizer(stop_words=nltk english) over spaCy lemmas",
+      "classifier": "LogisticRegression(solver='liblinear', random_state=12345)",
+      "train": {"accuracy": 0.93, "f1": 0.93, "aps": 0.98, "roc_auc": 0.98},
+      "test":  {"accuracy": 0.88, "f1": 0.88, "aps": 0.95, "roc_auc": 0.95}
+    },
+    "model_4_spacy_tfidf_lgbm": {
+      "vectorizer": "TfidfVectorizer(stop_words=nltk english) over spaCy lemmas",
+      "classifier": "LGBMClassifier(n_estimators=500, learning_rate=0.1, random_state=12345)",
+      "train": {"accuracy": 1.00, "f1": 1.00, "aps": 1.00, "roc_auc": 1.00},
+      "test":  {"accuracy": 0.87, "f1": 0.87, "aps": 0.94, "roc_auc": 0.95}
+    }
+  },
+  "best_model": "model_1_nltk_tfidf_lr",
+  "best_test_f1": 0.88,
+  "target_met": true,
+  "my_review_probabilities": {
+    "reviews": [
+      "I did not like this movie at all. The plot made no sense and I checked my phone twice.",
+      "Not bad. I went in expecting nothing and came out still thinking about it the next day.",
+      "A masterpiece. Every frame is deliberate and the ending earns itself.",
+      "Oh great, another two hours of a man staring sadly out of a window.",
+      "The acting is wooden, the script is lazy, and somehow I still want to watch it again.",
+      "Beautiful to look at and completely empty underneath.",
+      "I wanted to hate this one and I could not. It is actually very good.",
+      "Worst thing I have seen this year. Save your money and save your evening."
+    ],
+    "model_1": [0.24, 0.18, 0.78, 0.29, 0.06, 0.46, 0.32, 0.00],
+    "model_3": [0.30, 0.09, 0.81, 0.23, 0.05, 0.37, 0.31, 0.01],
+    "model_4": [0.51, 0.16, 0.75, 0.19, 0.12, 0.42, 0.61, 0.02]
+  }
+}

@@ -1,0 +1,102 @@
+Captured output of the approved notebook run on the TripleTen platform.
+Kernel restarted, all cells run top to bottom, no errors.
+
+rows, columns: (47331, 17)
+
+missing values per column:
+average_rating    2
+votes             2
+dtype: int64
+
+fully duplicated review texts: 91
+
+train    23796
+test     23535
+Name: ds_part, dtype: int64
+
+0    23715
+1    23616
+Name: pos, dtype: int64
+
+class balance by split (count, share positive):
+         count   mean
+ds_part
+test     23535  0.498
+train    23796  0.499
+
+pos          0      1
+ds_part
+test     11803  11732
+train    11912  11884
+
+train / test shapes after the split: (23796, 18) (23535, 18)
+
+=== Model 0: constant ===
+DummyClassifier(strategy='most_frequent')
+            train  test
+Accuracy      0.5   0.5
+F1            0.0   0.0
+APS           0.5   0.5
+ROC AUC       0.5   0.5
+
+=== Model 1: NLTK stopwords, TF-IDF, logistic regression ===
+[nltk_data] Downloading package stopwords to /home/student/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+train: (23796, 71531)
+test:  (23535, 71531)
+LogisticRegression(random_state=12345, solver='liblinear')
+            train  test
+Accuracy     0.94  0.88
+F1           0.94  0.88
+APS          0.98  0.95
+ROC AUC      0.98  0.95
+
+--- Model 1 on my own reviews ---
+0.24:  i did not like this movie at all the plot made no sense and i checked my phone twice
+0.18:  not bad i went in expecting nothing and came out still thinking about it the next day
+0.78:  a masterpiece every frame is deliberate and the ending earns itself
+0.29:  oh great another two hours of a man staring sadly out of a window
+0.06:  the acting is wooden the script is lazy and somehow i still want to watch it again
+0.46:  beautiful to look at and completely empty underneath
+0.32:  i wanted to hate this one and i could not it is actually very good
+0.00:  worst thing i have seen this year save your money and save your evening
+
+=== Model 3: spaCy lemmas, TF-IDF, logistic regression ===
+lemmatizing train: 100% 23796/23796 [03:40<00:00, 186.75it/s]
+lemmatizing test:  100% 23535/23535 [03:24<00:00, 195.48it/s]
+train: (23796, 59139)
+test:  (23535, 59139)
+LogisticRegression(random_state=12345, solver='liblinear')
+            train  test
+Accuracy     0.93  0.88
+F1           0.93  0.88
+APS          0.98  0.95
+ROC AUC      0.98  0.95
+
+--- Model 3 on my own reviews ---
+0.30:  i did not like this movie at all the plot made no sense and i checked my phone twice
+0.09:  not bad i went in expecting nothing and came out still thinking about it the next day
+0.81:  a masterpiece every frame is deliberate and the ending earns itself
+0.23:  oh great another two hours of a man staring sadly out of a window
+0.05:  the acting is wooden the script is lazy and somehow i still want to watch it again
+0.37:  beautiful to look at and completely empty underneath
+0.31:  i wanted to hate this one and i could not it is actually very good
+0.01:  worst thing i have seen this year save your money and save your evening
+
+=== Model 4: spaCy lemmas, TF-IDF, LightGBM ===
+LGBMClassifier(n_estimators=500, random_state=12345)
+            train  test
+Accuracy      1.0  0.87
+F1            1.0  0.87
+APS           1.0  0.94
+ROC AUC       1.0  0.95
+
+--- Model 4 on my own reviews ---
+0.51:  i did not like this movie at all the plot made no sense and i checked my phone twice
+0.16:  not bad i went in expecting nothing and came out still thinking about it the next day
+0.75:  a masterpiece every frame is deliberate and the ending earns itself
+0.19:  oh great another two hours of a man staring sadly out of a window
+0.12:  the acting is wooden the script is lazy and somehow i still want to watch it again
+0.42:  beautiful to look at and completely empty underneath
+0.61:  i wanted to hate this one and i could not it is actually very good
+0.02:  worst thing i have seen this year save your money and save your evening
